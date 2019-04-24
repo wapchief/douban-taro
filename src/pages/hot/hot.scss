@@ -1,0 +1,64 @@
+@import "~taro-ui/dist/style/components/search-bar.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/rate.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/load-more.scss";
+@import "~taro-ui/dist/style/components/activity-indicator.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+.hot-search-box {
+  .list_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 40px 0 40px;
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 200px;
+      background: #ffffff;
+      margin-bottom: 30px;
+      .cover_image {
+        width: 100%;
+        height: 260px;
+        border: 8px;
+      }
+      .title {
+        font-size: 28px;
+        align-content: center;
+        color: #333333;
+      }
+      .rating_box {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        .rating_bar {
+          padding-top: 6px;
+          align-content: center;
+        }
+        .rating_tv {
+          color: #666666;
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
+  //加载更多样式
+  .at-load-more{
+    .at-load-more__cnt{
+      .at-button{
+        border: 0;
+        font-size: 24px;
+        color: #414c4c
+      }
+    }
+  }
+}
+
+.at-search-bar__action {
+  //搜索按钮
+  color: #8d92a3;
+  background-color: transparent;
+}
