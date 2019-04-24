@@ -1,0 +1,76 @@
+@import "~taro-ui/dist/style/components/rate.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/load-more.scss";
+@import "~taro-ui/dist/style/components/activity-indicator.scss";
+.list-box {
+  .item {
+    padding: 30px 40px 40px 40px;
+    border-bottom: 20px solid #eeeeee;
+    .item-raking {
+      border-radius: 8px;
+      background: #f6cf8c;
+      color: #bf9252;
+      font-size: 28px;
+      align-content: center;
+      padding: 4px 12px 4px 12px;
+    }
+    .item-detail-box {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      margin-top: 20px;
+      .item-cover {
+        flex: 0 0 200px;
+        border-radius: 8px;
+        border: 1px solid #cccccc;
+        width: 200px;
+        height: 266px;
+      }
+      .item-detail {
+        padding-left: 40px;
+        .title {
+          font-size: 32px;
+          color: #333333;
+          font-family: PingFangSC-Medium;
+        }
+        .rating-box {
+          display: flex;
+          flex-direction: row;
+          align-content: center;
+          margin-top: 10px;
+          .rating-bar {
+            padding-top: 6px;
+            align-content: center;
+          }
+          .rating-tv {
+            font-size: 24px;
+            color: #666666;
+          }
+        }
+        .tag-box {
+            line-height:32px;
+            margin-top: 10px;
+          .tag {
+            color: #999999;
+            font-size: 26px;
+          }
+        }
+      }
+    }
+    .item-describe {
+      align-content: center;
+      margin-top: 30px;
+      padding: 10px 16px 20px 16px;
+      border-radius: 6px;
+      background: #f7f7f7;
+
+      .item-describe-tv {
+        font-size: 24px;
+        align-content: center;
+        background: #f7f7f7;
+        color: #484a49;
+        padding: 0;
+      }
+    }
+  }
+}
