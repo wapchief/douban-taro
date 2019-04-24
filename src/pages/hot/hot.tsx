@@ -14,7 +14,7 @@ export default class Hot extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '正在热映',
+    navigationBarTitleText: '院线热映',
     enablePullDownRefresh: true,//开启下拉刷新
     backgroundTextStyle: "dark",
     backgroundColor: "#fafcfd",
@@ -25,7 +25,16 @@ export default class Hot extends Component {
     loadMore: 'more',
     value: '',
     pageNo: 0,
-    datas: [],
+    datas: [{
+      id:'',
+      images:{
+        large:''
+      },
+      title:'',
+      rating:{
+        average:0
+      }
+    }],
     total: 0,
   })
   onChange(value) {
@@ -38,8 +47,8 @@ export default class Hot extends Component {
   }
   //下拉刷新
   onPullDownRefresh() {
-    this.setState({ pageNo: 0, datas: [] })
-    this._getDoubanList()
+    this.setState({ pageNo: 0, datas: [] ,loadMore: 'more'})
+    this._getDoubanList(0)
   }
   //加载更多
   onReachBottom() {
@@ -50,7 +59,7 @@ export default class Hot extends Component {
         pageNo: this.state.pageNo += 15,
         loadMore: 'loading'
       })
-      this._getDoubanList()
+      this._getDoubanList(this.state.pageNo)
 
     } else {
       this.setState({
@@ -60,23 +69,28 @@ export default class Hot extends Component {
 
   }
 
-  componentWillMount() { }
+  componentWillMount() {
+   }
 
-  componentDidMount() { }
+  componentDidMount() { 
+    Taro.startPullDownRefresh()
 
-  componentWillUnmount() { }
+  }
+
+  componentWillUnmount() { 
+
+  }
 
   componentDidShow() {
-    this._getDoubanList()
-    //  this.setState({datas:res.data})
+
   }
   // 请求热门电影列表
-  _getDoubanList() {
+  _getDoubanList(page) {
     const _this = this
     Taro.request({
       url: doubanHot,
       data: {
-        start: this.state.pageNo,
+        start: page,
         count: 15,
       },
       header: {
@@ -94,12 +108,18 @@ export default class Hot extends Component {
 
       },
       complete() {
-
+        _this._stopRefresh()
       },
     })
   }
 
-  componentDidHide() { }
+  _stopRefresh(){
+    Taro.stopPullDownRefresh()
+  }
+
+  componentDidHide() { 
+
+  }
 
   render() {
     return (
@@ -134,7 +154,7 @@ export default class Hot extends Component {
         <AtLoadMore
           status={this.state.loadMore}
           moreText=''
-          noMoreText='已经到底了'>
+          noMoreText='没有更多数据了'>
 
         </AtLoadMore>
       </View>
