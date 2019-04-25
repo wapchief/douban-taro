@@ -121,6 +121,11 @@ export default class Hot extends Component {
 
   }
 
+  onClickItem(item){
+    console.log(item.title)
+    Taro.navigateTo({url:'/pages/details/details?id='+item.id+'&title='+item.title})
+  }
+
   render() {
     return (
       <View className="hot-search-box">
@@ -133,7 +138,9 @@ export default class Hot extends Component {
         {/* list */}
         <View className='list_box'>
           {this.state.datas.map((item) => {
-            return <View className='item' key={item.id}>
+            return <View className='item' key={item.id} onClick={(()=>{
+              this.onClickItem(item)
+            })}>
               <Image className='cover_image' src={item.images.large}></Image>
               <Text className='title'>{item.title}</Text>
               <View className='rating_box'>

@@ -1,0 +1,36 @@
+@import "~taro-ui/dist/style/components/rate.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/load-more.scss";
+@import "~taro-ui/dist/style/components/activity-indicator.scss";
+
+.details-box {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+
+  .item-cover {
+    flex: 0 0 200px;
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+    width: 200px;
+    height: 266px;
+  }
+  .item-detail {
+    padding-left: 30px;
+    .title {
+      font-size: 32px;
+      color: #333333;
+      font-family: PingFangSC-Medium;
+    }
+  
+    .tag-box {
+      line-height: 32px;
+      margin-top: 10px;
+      .tag {
+        color: #999999;
+        font-size: 26px;
+        display: block;
+      }
+    }
+  }
+}

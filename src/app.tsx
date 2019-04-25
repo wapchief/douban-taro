@@ -23,6 +23,7 @@ class App extends Component {
       'pages/hot/hot',
       'pages/top250/top250',
       'pages/me/me',
+      'pages/details/details',
     ],
     window: {
       backgroundTextStyle: 'light',

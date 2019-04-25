@@ -100,12 +100,19 @@ export default class Top250 extends Component {
     })
   }
 
+  onClickItem(item){
+    console.log(item.title)
+    Taro.navigateTo({url:'/pages/details/details?id='+item.id+'&title='+item.title})
+  }
+
   render() {
     return (
 
       <View className="list-box">
         {this.state.datas.map((item, i) => {
-          return <View className="item" key={item.id}>
+          return <View className="item" onClick={(()=>{
+           this.onClickItem(item)
+          })} key={item.id}>
             <Text className="item-raking">{'No.' + (i + 1)}</Text>
             <View className="item-detail-box">
               <Image className="item-cover" src={item.images.large}></Image>
