@@ -4,7 +4,7 @@
 	"description": "豆瓣小程序",
 	"appid": "wx2c49bdedb071887d",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
 		"minified": false,

@@ -10,7 +10,9 @@ https://nervjs.github.io/taro/
 
 ## Nginx 代理本地请求,本地nginx.conf 配置代码
 
-> 注意：在请求中默认使用 https://douban.uieee.com 代理请求，官方的 https://api.douban.com/v2 接口禁止微信小程序访问。但是uieee有请求限制，每个整点自动更新请求次数，代理说明 https://github.com/zce/douban-api-proxy 。Nginx只能本地调试
+> 注意：在请求中默认使用 https://douban.uieee.com 代理请求，官方的 https://api.douban.com/v2 接口禁止微信小程序访问。但是uieee有请求限制，每个整点自动更新请求次数，Nginx只能本地调试
+APi接口镜像：https://douban-api-docs.zce.me/
+感谢 https://github.com/zce 作者提供
 ```
 location  /v2/ { 
      proxy_store off;  
@@ -22,7 +24,8 @@ location  /v2/ {
      proxy_connect_timeout 600;  
      proxy_read_timeout 600;  
      proxy_send_timeout 600;  
-     proxy_pass https://api.douban.com/v2/;}
+     proxy_pass https://api.douban.com/v2/;
+     }
 
 ```
 
