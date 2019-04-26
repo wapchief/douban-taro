@@ -9,6 +9,8 @@ https://nervjs.github.io/taro/
 
 
 ## Nginx 代理本地请求,本地nginx.conf 配置代码
+
+> 注意：在请求中默认使用 https://douban.uieee.com 代理请求，官方的 https://api.douban.com/v2 接口禁止微信小程序访问。但是uieee有请求限制，每个整点自动更新请求次数，代理说明 https://github.com/zce/douban-api-proxy 。Nginx只能本地调试
 ```
 location  /v2/ { 
      proxy_store off;  
@@ -24,45 +26,25 @@ location  /v2/ {
 
 ```
 
-## 运行命令：
-
-### 微信小程序：
+## 运行编译命令：
 
 ```
+//微信小程序：
 yarn dev:weapp
-```
 
-### 百度小程序
-
-```
+//百度小程序：
 yarn dev:swan
-```
 
-### 支付宝小程序
-
-```
+//支付宝小程序
 yarn dev:alipay
-```
 
-### 头条小程序
-```
+//头条小程序
 yarn dev:tt
-```
 
-### h5
+//H5
+yarn dev:h5
 
-```
- yarn dev:h5
-```
-
-### h5打包
-
-```
-yarn build:h5
-```
-
-### React Native
-
-```
+//React Native
 yarn dev:rn
+
 ```
