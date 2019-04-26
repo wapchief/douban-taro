@@ -2,10 +2,29 @@
 @import "~taro-ui/dist/style/components/icon.scss";
 @import "~taro-ui/dist/style/components/load-more.scss";
 @import "~taro-ui/dist/style/components/activity-indicator.scss";
+@import "~taro-ui/dist/style/components/progress.scss";
 page {
   background-color: #f9f5f4;
 }
 .root-box {
   margin: 40px 30px 40px 30px;
  
+}
+// .at-progress__outer-inner-background {
+//   border-radius: 2rpx;
+// }
+
+//重写进度条样式
+.at-progress {
+  width:200px;
+  .at-progress__outer {
+    padding-top:3px;
+    margin-bottom:2px;
+    .at-progress__outer-inner {
+      border-radius: 4px;
+      .at-progress__outer-inner-background {
+        border-radius: 4px;
+      }
+    }
+  }
 }

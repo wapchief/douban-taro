@@ -4,7 +4,7 @@ import { AtSearchBar, AtRate, AtLoadMore } from 'taro-ui'
 
 import '../top250/top250.scss'
 const doubanTop = 'https://douban.uieee.com/v2/movie/top250'
-
+const doubanTop3='http://localhost:8080/v2/movie/top250'
 export default class Top250 extends Component {
 
   /**
@@ -29,6 +29,7 @@ export default class Top250 extends Component {
       genres: [],
       pubdates: [],
       durations:[],
+      original_title:'',
       images: {
         large: ''
       },
@@ -75,7 +76,7 @@ export default class Top250 extends Component {
   _getDouBanList(page) {
     const _this = this
     Taro.request({
-      url: doubanTop,
+      url: doubanTop3,
       data: {
         start: page,
         count: 15,
@@ -92,7 +93,7 @@ export default class Top250 extends Component {
         })
       },
       fail(e) {
-
+        console.log('fail=========='+e.data)
       },
       complete() {
         Taro.hideLoading()
@@ -131,6 +132,8 @@ export default class Top250 extends Component {
                 </View>
                 <View className="tag-box">
                   <Text className="tag">
+                    {'又名：'}{item.original_title}{'\n'}
+
                     {/* 分类 */}
                     {item.genres.join(' ')}{'/'}
                     {/* 导演 */}
@@ -139,14 +142,14 @@ export default class Top250 extends Component {
                     {item.casts.map((child) => {
                       return child.name
                     }).join(' ')}
-                    {'\n时长：'}{item.durations[0]}
                   </Text>
                 </View>
               </View>
             </View>
             <View className="item-describe">
               <Text className="item-describe-tv">
-                {item.pubdates.join('\n')}
+                {/* {item.pubdates.join('\n')} */}
+                {'上映年份：'}{item.year}
               </Text>
             </View>
           </View>

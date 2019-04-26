@@ -4,6 +4,8 @@
 @import "~taro-ui/dist/style/components/rate.scss";
 @import "~taro-ui/dist/style/components/load-more.scss";
 @import "~taro-ui/dist/style/components/activity-indicator.scss";
+@import '~taro-ui/dist/style/components/loading.scss';
+
 .hot-search-box {
   .list_box {
     display: flex;
@@ -21,11 +23,13 @@
         width: 100%;
         height: 266px;
         border-radius: 8px;
+        border: 1px solid #f1f3f8;
       }
       .title {
         font-size: 28px;
         align-content: center;
         color: #333333;
+        margin-top: 10px;
       }
       .rating_box {
         display: flex;

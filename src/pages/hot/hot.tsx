@@ -3,7 +3,8 @@ import { View, Text, Image } from '@tarojs/components'
 import { AtSearchBar, AtRate, AtLoadMore } from 'taro-ui'
 import '../hot/hot.scss'
 const doubanHot = 'https://douban.uieee.com/v2/movie/in_theaters'
-const doubanTop = 'https://douban.uieee.com/v2/movie/top250'
+//本地nginx代理请求
+const doubanHot3='http://localhost:8080/v2/movie/in_theaters'
 const doubanSearch = 'https://douban.uieee.com/v2/movie/search?q=%E6%88%98%E7%8B%BC&start=25&count=25'
 export default class Hot extends Component {
   /**
@@ -35,7 +36,7 @@ export default class Hot extends Component {
         average:0
       }
     }],
-    total: 0,
+    total: -1,
   })
   onChange(value) {
     this.setState({
@@ -70,11 +71,15 @@ export default class Hot extends Component {
   }
 
   componentWillMount() {
+    Taro.showLoading({ title: '正在加载' })
+    this.setState({
+      datas: []
+    })
+    this._getDoubanList(0)
    }
 
   componentDidMount() { 
-    Taro.startPullDownRefresh()
-
+    
   }
 
   componentWillUnmount() { 
@@ -87,14 +92,15 @@ export default class Hot extends Component {
   // 请求热门电影列表
   _getDoubanList(page) {
     const _this = this
+    Taro.addInterceptor(Taro.interceptors.logInterceptor)
     Taro.request({
-      url: doubanHot,
+      url: doubanHot3,
       data: {
         start: page,
         count: 15,
       },
       header: {
-        'content-type': 'json'
+        'content-type': 'json',
       },
       success(e) {
         console.log(e.data)
@@ -108,7 +114,8 @@ export default class Hot extends Component {
 
       },
       complete() {
-        _this._stopRefresh()
+        _this._stopRefresh();
+        Taro.hideLoading()
       },
     })
   }
@@ -135,6 +142,7 @@ export default class Hot extends Component {
           onChange={this.onChange.bind(this, '')}
           onActionClick={this.onActionClick.bind(this)}
         />
+        {this.state.total==0?<View onClick={this.onClickItem.bind(this)}>请求失败</View>:''}
         {/* list */}
         <View className='list_box'>
           {this.state.datas.map((item) => {
@@ -146,7 +154,7 @@ export default class Hot extends Component {
               <View className='rating_box'>
                 {item.rating.average > 0 ? <View className='rating_bar'>
                   <AtRate
-                    size='12'
+                    size='10'
                     max={5}
                     value={item.rating.average / 2}
                   />

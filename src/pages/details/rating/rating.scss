@@ -1,12 +1,48 @@
 @import "~taro-ui/dist/style/components/rate.scss";
 @import "~taro-ui/dist/style/components/icon.scss";
-@import "~taro-ui/dist/style/components/load-more.scss";
-@import "~taro-ui/dist/style/components/activity-indicator.scss";
-
+@import "~taro-ui/dist/style/components/progress.scss";
 .rating-box {
   background-color: #ffffff;
   border-radius: 15px;
-  
-  
-  
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-right: 40px;
+  padding: 20px;
+  .title {
+    font-size: 24px;
+    color: #22242a;
+    font-family: PingFangSC-Medium;
+  }
+  .rating-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .rating-left-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .rating-sum {
+        font-size: 37px;
+        color: #000;
+        font-family: PingFangSC-Medium;
+      }
+    }
+    .rating-right-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-left: 20px;
+    }
+    .rating-progress-box {
+      display: flex;
+      flex-direction: column;
+      
+      .rating-comments-count {
+        font-size: 20px;
+        color: #999999;
+      }
+    }
+  }
 }

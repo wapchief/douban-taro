@@ -4,6 +4,13 @@ import { AtRate } from 'taro-ui'
 import '../details/details.scss'
 let doubanDetails = 'https://douban.uieee.com/v2/movie/subject/'
 import Info from '../details/info/info'
+import Rating from '../details/rating/rating'
+import jsonDetails from './moveDetails'
+let details=jsonDetails.data;
+console.log(details.data)
+const doubanDetails3='http://localhost:8080/v2/movie/subject/'
+
+
 export default class Details extends Component {
 
     /**
@@ -58,6 +65,7 @@ export default class Details extends Component {
         navigationBarTitleText: this.state.title,
         backgroundColor: "#f9f5f4",
     }
+    static data: any;
 
     componentWillMount() {
         const date = this.$router.params
@@ -71,7 +79,7 @@ export default class Details extends Component {
     _getDetails(id) {
         Taro.showLoading({ title: '正在加载' })
         const _this = this
-        const url = doubanDetails + id
+        const url = doubanDetails3 + id
         console.log(url)
         Taro.request({
             url: url,
@@ -97,10 +105,13 @@ export default class Details extends Component {
 
     render() {
         const item = this.state.data
+        //假数据
+        // const item = details
         return (
             <ScrollView className="root-box">
                 {/* 头部简介 */}
                 <Info data={item}/>
+                <Rating data={item}></Rating>
             </ScrollView>
         )
     }

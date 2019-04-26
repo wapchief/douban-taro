@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text ,Image} from '@tarojs/components'
 import '../me/me.scss'
 export default class Me extends Component {
 
@@ -14,6 +14,9 @@ export default class Me extends Component {
     navigationBarTitleText: '正在热映'
   }
 
+  _goToDetails(){
+    Taro.navigateTo({url:'/pages/details/details?id=27202819&title=反贪风暴'})
+  }
   componentWillMount () { }
 
   componentDidMount () { }
@@ -26,8 +29,9 @@ export default class Me extends Component {
 
   render () {
     return (
-      <View className='index'>
-        <Text>Me</Text>
+      <View className="me-box">
+        <Text>Me---</Text>
+        <Image className="image" src='https://img3.doubanio.com/view/photo/s_ratio_poster/public/p480747492.jpg' onClick={this._goToDetails.bind(this)}/>
       </View>
     )
   }

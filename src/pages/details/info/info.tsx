@@ -43,17 +43,12 @@ class Info extends Component<{}, Info>{
                 <View className="details-box">
                     <Image className="item-cover" src={item.images.large}></Image>
                     <View className="item-detail">
-                        <Text className="title">{item.title}</Text>
+                        <Text className="title">{item.title}{'('}{item.year}{')'}</Text>
+                        <Text className="original-title">{item.original_title}{'('}{item.year}{')'}</Text>
                         <View className="tag-box">
                             <Text className="tag">
                                 {/* 分类 */}
                                 {item.genres.join(' ')}{'/'}
-                                {/* 导演 */}
-                                {item.directors[0].name}{'/'}
-                                {/* 遍历主演，并格式化空格分割 */}
-                                {item.casts.map((child) => {
-                                    return child.name
-                                }).join(' ')}
                                 {'\n时长：'}{item.durations[0]}
                             </Text>
                         </View>
