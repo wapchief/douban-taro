@@ -1,6 +1,5 @@
-import Taro, { Component, Config, showLoading } from '@tarojs/taro'
-import { View, Text, ScrollView, Image } from '@tarojs/components'
-import { AtRate } from 'taro-ui'
+import Taro, { Component, Config } from '@tarojs/taro'
+import { View, Text, ScrollView } from '@tarojs/components'
 import '../details/details.scss'
 import Info from '../details/info/info'
 import Rating from '../details/rating/rating'
@@ -117,12 +116,15 @@ export default class Details extends Component {
         })
     }
 
+    _summaryExp(){
+        this.setState({
+            summaryExpand:!this.state.summaryExpand
+        })
+    }
 
 
     render() {
         const item = this.state.details
-        //假数据
-        // const item = details
         return (
             <ScrollView className="root-box">
                 {/* 头部简介 */}
@@ -132,7 +134,7 @@ export default class Details extends Component {
                 {/* 简介 */}
                 <View className="sub-title">简介</View>
                 <Text className={this.state.summaryExpand ? "summary-tv" : "summary-tv-all"}>{item.summary}</Text>
-                <View className="summary-bt">{this.state.summaryExpand ? "" : "展开"}</View>
+                <View className="summary-bt" onClick={this._summaryExp.bind(this)}>{this.state.summaryExpand ? "" : "展开"}</View>
                 {/* 影人 */}
                 <View className="sub-title">影人</View>
                 <Casts data={item}/>

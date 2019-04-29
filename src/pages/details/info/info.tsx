@@ -1,6 +1,5 @@
-import Taro, { Component, Config, showLoading } from '@tarojs/taro'
-import { View, Text, ScrollView, Image } from '@tarojs/components'
-import { AtRate } from 'taro-ui'
+import Taro, { Component} from '@tarojs/taro'
+import { View, Text, Image } from '@tarojs/components'
 
 import './info.scss'
 import { ComponentClass } from 'react';
@@ -33,7 +32,7 @@ class Info extends Component<{}, Info>{
     
     
     static defaultProps = {
-        data:{}
+        data:{genres:[]}
     }
 
 
@@ -51,6 +50,7 @@ class Info extends Component<{}, Info>{
                                 {item.genres.join(' ')}{'/'}
                                 {item.countries.join(' ')}
                                 {'\n\n又名：'}{item.aka.join('/')}
+                                {'\n片长:'}{item.durations[0]}
                             </Text>
                         </View>
                     </View>

@@ -1,5 +1,5 @@
-import Taro, { Component, Config, showLoading } from '@tarojs/taro'
-import { View, Text, ScrollView, Image } from '@tarojs/components'
+import Taro, { Component} from '@tarojs/taro'
+import { View, Text} from '@tarojs/components'
 import { AtRate, AtProgress } from 'taro-ui'
 
 import './rating.scss'
@@ -33,7 +33,7 @@ class Rating extends Component<{}, Rating>{
 
 
     static defaultProps = {
-        data: {}
+        data: {rating:{details:{}}}
     }
 
 

@@ -154,14 +154,15 @@ export default class Top250 extends Component {
                     {item.casts.map((child) => {
                       return child.name
                     }).join(' ')}
+                    {'/片长:'}{item.durations[0]}
                   </Text>
                 </View>
               </View>
             </View>
             <View className="item-describe">
               <Text className="item-describe-tv">
-                {/* {item.pubdates.join('\n')} */}
-                {'上映年份：'}{item.year}
+                {item.pubdates.join('\n')}
+                {/* {'上映年份：'}{item.year} */}
               </Text>
             </View>
           </View>
