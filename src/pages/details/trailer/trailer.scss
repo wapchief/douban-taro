@@ -1,0 +1,20 @@
+.trailer-box {
+  display: flex;
+  flex-direction: row;
+  .video {
+    width: 320px;
+    height: 180px;
+    margin-right: 20px;
+  }
+  .trailer-item-box {
+    display: flex;
+    flex-direction: column;
+    height: 180px;
+    margin-right: 20px;
+    .cover {
+      width: 320px;
+      height: 180px;
+      border: 1px solid #f1f3f8;
+    }
+  }
+}

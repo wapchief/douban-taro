@@ -1,0 +1,31 @@
+.casts-box {
+    display: flex;
+    flex-direction: row;
+  .casts-item-box {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    .info-avatar {
+      width: 200px;
+      height: 266px;
+      border-radius: 8px;
+      border: 1px solid #f1f3f8;
+    }
+    .info-name {
+      margin-top: 15px;
+      font-size: 24px;
+      color: #242424;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+    .info-status {
+      margin-top: 6px;
+      font-size: 20px;
+      color: #cccccc;
+    }
+  }
+}

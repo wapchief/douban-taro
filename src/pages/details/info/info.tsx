@@ -49,7 +49,8 @@ class Info extends Component<{}, Info>{
                             <Text className="tag">
                                 {/* 分类 */}
                                 {item.genres.join(' ')}{'/'}
-                                {'\n时长：'}{item.durations[0]}
+                                {item.countries.join(' ')}
+                                {'\n\n又名：'}{item.aka.join('/')}
                             </Text>
                         </View>
                     </View>

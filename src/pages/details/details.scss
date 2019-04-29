@@ -7,8 +7,39 @@ page {
   background-color: #f9f5f4;
 }
 .root-box {
-  margin: 40px 30px 40px 30px;
- 
+  width: 100%;
+  padding: 40px 30px 40px 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  .sub-title {
+    color: #000;
+    padding: 40px 0 30px 0;
+    font-size: 32px;
+    font-family: PingFangSC-Medium;
+  }
+  .summary-tv {
+    width: 100%;
+    color: #242424;
+    font-size: 28px;
+  }
+  .summary-tv-all {
+    width: 100%;
+    color: #242424;
+    font-size: 28px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  .summary-bt {
+    display: flex;
+    justify-content: flex-end;
+    color: #cccccc;
+    font-size: 28px;
+  }
 }
 // .at-progress__outer-inner-background {
 //   border-radius: 2rpx;
@@ -16,10 +47,10 @@ page {
 
 //重写进度条样式
 .at-progress {
-  width:200px;
+  width: 200px;
   .at-progress__outer {
-    padding-top:3px;
-    margin-bottom:2px;
+    padding-top: 3px;
+    margin-bottom: 2px;
     .at-progress__outer-inner {
       border-radius: 4px;
       .at-progress__outer-inner-background {

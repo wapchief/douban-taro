@@ -39,6 +39,14 @@ class Rating extends Component<{}, Rating>{
 
     render() {
         const item = this.props.data
+        //总评数
+        const rating_count=item.rating.details[5]+item.rating.details[4]+item.rating.details[3]+item.rating.details[2]+item.rating.details[1]
+        const ratings=[ (item.rating.details[5]/rating_count)*100,
+        (item.rating.details[4]/rating_count)*100,
+        (item.rating.details[3]/rating_count)*100,
+        (item.rating.details[2]/rating_count)*100,
+        (item.rating.details[1]/rating_count)*100
+]
         return (
             <View className="rating-box">
                 <Text className="title">豆瓣评分™</Text>
@@ -61,11 +69,12 @@ class Rating extends Component<{}, Rating>{
                     </View>
                     
                     <View className="rating-progress-box">
-                        <AtProgress percent={80} strokeWidth={6} isHidePercent color="#FFC82C"/>
-                        <AtProgress percent={12} strokeWidth={6} isHidePercent color="#FFC82C"/>
-                        <AtProgress percent={6} strokeWidth={6} isHidePercent color="#FFC82C"/>
-                        <AtProgress percent={1} strokeWidth={6} isHidePercent color="#FFC82C"/>
-                        <AtProgress percent={1} strokeWidth={6} isHidePercent color="#FFC82C"/>
+                        
+                        <AtProgress percent={ratings[0]} strokeWidth={6} isHidePercent color="#FFC82C"/>
+                        <AtProgress percent={ratings[1]} strokeWidth={6} isHidePercent color="#FFC82C"/>
+                        <AtProgress percent={ratings[2]} strokeWidth={6} isHidePercent color="#FFC82C"/>
+                        <AtProgress percent={ratings[3]} strokeWidth={6} isHidePercent color="#FFC82C"/>
+                        <AtProgress percent={ratings[4]} strokeWidth={6} isHidePercent color="#FFC82C"/>
                         <Text className="rating-comments-count">{item.ratings_count}{'人评分'}</Text>
                     </View>
                 </View>

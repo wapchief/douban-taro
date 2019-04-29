@@ -2,13 +2,17 @@ import Taro, { Component, Config, showLoading } from '@tarojs/taro'
 import { View, Text, ScrollView, Image } from '@tarojs/components'
 import { AtRate } from 'taro-ui'
 import '../details/details.scss'
-let doubanDetails = 'https://douban.uieee.com/v2/movie/subject/'
 import Info from '../details/info/info'
 import Rating from '../details/rating/rating'
+import Casts from '../details/casts/casts'
+import Trailer from '../details/trailer/trailer'
 import jsonDetails from './moveDetails'
-let details=jsonDetails.data;
-console.log(details.data)
-const doubanDetails3='http://localhost:8080/v2/movie/subject/'
+let details = jsonDetails.data;
+// console.log()
+// console.log(Array.from(ratingDetails), 'kkkkk')
+const doubanDetails = 'https://douban.uieee.com/v2/movie/subject/'
+//本地代理请求
+// const doubanDetails = 'http://localhost:8080/v2/movie/subject/'
 
 
 export default class Details extends Component {
@@ -23,41 +27,42 @@ export default class Details extends Component {
     state = {
         id: '',
         title: '',
-        data: {
+        summaryExpand: false,
+        details: {
             year: '',//年份
             images: { large: '' },//封面
             rating: { average: 0, details: {} },//评分
             wish_count: '',//想看
             collect_count: '',//收藏人数
             popular_comments: [{
-                rating: { value: 0 }, 
+                rating: { value: 0 },
                 author: { avatar: '', name: '', signature: '' },
-                content:'',//评论内容
-                created_at:'',//评论时间
+                content: '',//评论内容
+                created_at: '',//评论时间
             }],//热评列表（List）
-            title:'',
-            photos_count:0,//剧照数量
-            pubdate:'',//上映日期
-            share_url:'',//分享链接
-            writers:[{
-                avatars:{large:''},
-                name:'',
-                alt:'',
+            title: '',
+            photos_count: 0,//剧照数量
+            pubdate: '',//上映日期
+            share_url: '',//分享链接
+            writers: [{
+                avatars: { large: '' },
+                name: '',
+                alt: '',
             }],//作者（List）
-            pubdates:[],//上映时间
-            tags:[],//标签
-            durations:[],//时长
-            genres:[],//分类
-            trailers:[{
-                resource_url:'',//预告片播放链接
-                title:'',
-                medium:'',
+            pubdates: [],//上映时间
+            tags: [],//标签
+            durations: [],//时长
+            genres: [],//分类
+            trailers: [{
+                resource_url: '',//预告片播放链接
+                title: '',
+                medium: '',
             }],//预告片（List）
-            casts:[],//演员
-            summary:'',//简介
-            directors:[],//导演
-            ratings_count:0,//评分人数
-            comments_count:0,//评论人数
+            casts: [],//演员
+            summary: '',//简介
+            directors: [],//导演
+            ratings_count: 0,//评分人数
+            comments_count: 0,//评论人数
         }
     }
 
@@ -79,7 +84,7 @@ export default class Details extends Component {
     _getDetails(id) {
         Taro.showLoading({ title: '正在加载' })
         const _this = this
-        const url = doubanDetails3 + id
+        const url = doubanDetails + id
         console.log(url)
         Taro.request({
             url: url,
@@ -87,13 +92,21 @@ export default class Details extends Component {
                 'content-type': 'json'
             },
             success(e) {
-                console.log(_this.state.id + '=========' + (doubanDetails + _this.state.id) + '========' + e.data)
-                _this.setState({
-                    data: e.data,
-                })
+                console.log(e.statusCode + '========' + e.data)
+                if(e.statusCode==200){
+                    _this.setState({
+                        details: e.data,
+                    })
+                }else{
+                    //请求失败使用本地假数据
+                    _this.setState({
+                        details: details,
+                    })
+                }
+                
             },
             fail(e) {
-
+                console.log('error')
             },
             complete() {
                 Taro.hideLoading()
@@ -104,15 +117,26 @@ export default class Details extends Component {
 
 
     render() {
-        const item = this.state.data
+        const item = this.state.details
         //假数据
         // const item = details
         return (
             <ScrollView className="root-box">
                 {/* 头部简介 */}
-                <Info data={item}/>
-                <Rating data={item}></Rating>
-            </ScrollView>
+                <Info data={item} />
+                {/* 评分模块 */}
+                <Rating data={item}/>
+                {/* 简介 */}
+                <View className="sub-title">简介</View>
+                <Text className={this.state.summaryExpand ? "summary-tv" : "summary-tv-all"}>{item.summary}</Text>
+                <View className="summary-bt">{this.state.summaryExpand ? "" : "展开"}</View>
+                {/* 影人 */}
+                <View className="sub-title">影人</View>
+                <Casts data={item}/>
+                {/* 预告片剧照 */}
+                <View className="sub-title">预告片/剧照</View>
+                <Trailer data={item}/>
+            </ScrollView >
         )
     }
 }
