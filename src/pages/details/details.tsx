@@ -6,6 +6,9 @@ import Info from '../details/info/info'
 import Rating from '../details/rating/rating'
 import Casts from '../details/casts/casts'
 import Trailer from '../details/trailer/trailer'
+import Comments from '../details/comments/comments'
+import Reviews from '../details/reviews/reviews'
+
 import jsonDetails from './moveDetails'
 let details = jsonDetails.data;
 // console.log()
@@ -136,6 +139,12 @@ export default class Details extends Component {
                 {/* 预告片剧照 */}
                 <View className="sub-title">预告片/剧照</View>
                 <Trailer data={item}/>
+                {/* 热门短评 */}
+                <View className="sub-title">短评</View>
+                <Comments data={item}/>
+                {/* 热门影评 */}
+                <View className="sub-title">影评</View>
+                <Reviews data={item}/>
             </ScrollView >
         )
     }

@@ -4,7 +4,9 @@ import { AtSearchBar, AtRate, AtLoadMore } from 'taro-ui'
 
 import '../top250/top250.scss'
 const doubanTop = 'https://douban.uieee.com/v2/movie/top250'
-const doubanTop3='http://localhost:8080/v2/movie/top250'
+// const doubanTop='http://localhost:8080/v2/movie/top250'
+import jsonDetails from './top250Json'
+let details = jsonDetails.data;
 export default class Top250 extends Component {
 
   /**
@@ -28,8 +30,8 @@ export default class Top250 extends Component {
       year: '',
       genres: [],
       pubdates: [],
-      durations:[],
-      original_title:'',
+      durations: [],
+      original_title: '',
       images: {
         large: ''
       },
@@ -76,7 +78,7 @@ export default class Top250 extends Component {
   _getDouBanList(page) {
     const _this = this
     Taro.request({
-      url: doubanTop3,
+      url: doubanTop,
       data: {
         start: page,
         count: 15,
@@ -86,14 +88,24 @@ export default class Top250 extends Component {
       },
       success(e) {
         console.log(e.data)
-        _this.setState({
-          datas: _this.state.datas.concat(e.data.subjects),
-          total: e.data.total,
-          loadMore: 'more',
-        })
+        if (e.statusCode == 200) {
+          _this.setState({
+            datas: _this.state.datas.concat(e.data.subjects),
+            total: e.data.total,
+            loadMore: 'more',
+          })
+        } else {
+          //本地数据
+          _this.setState({
+            datas: details,
+            total: e.data.total,
+            loadMore: 'noMore',
+          })
+        }
+
       },
       fail(e) {
-        console.log('fail=========='+e.data)
+        console.log('fail==========' + e.data)
       },
       complete() {
         Taro.hideLoading()
@@ -101,9 +113,9 @@ export default class Top250 extends Component {
     })
   }
 
-  onClickItem(item){
+  onClickItem(item) {
     console.log(item.title)
-    Taro.navigateTo({url:'/pages/details/details?id='+item.id+'&title='+item.title})
+    Taro.navigateTo({ url: '/pages/details/details?id=' + item.id + '&title=' + item.title })
   }
 
   render() {
@@ -111,8 +123,8 @@ export default class Top250 extends Component {
 
       <View className="list-box">
         {this.state.datas.map((item, i) => {
-          return <View className="item" onClick={(()=>{
-           this.onClickItem(item)
+          return <View className="item" onClick={(() => {
+            this.onClickItem(item)
           })} key={item.id}>
             <Text className="item-raking">{'No.' + (i + 1)}</Text>
             <View className="item-detail-box">

@@ -4,8 +4,10 @@ import { AtSearchBar, AtRate, AtLoadMore } from 'taro-ui'
 import '../hot/hot.scss'
 const doubanHot = 'https://douban.uieee.com/v2/movie/in_theaters'
 //本地nginx代理请求
-const doubanHot3='http://localhost:8080/v2/movie/in_theaters'
+// const doubanHot='http://localhost:8080/v2/movie/in_theaters'
 const doubanSearch = 'https://douban.uieee.com/v2/movie/search?q=%E6%88%98%E7%8B%BC&start=25&count=25'
+import jsonDetails from './hotJson'
+let details = jsonDetails.data;
 export default class Hot extends Component {
   /**
    * 指定config的类型声明为: Taro.Config
@@ -94,7 +96,7 @@ export default class Hot extends Component {
     const _this = this
     Taro.addInterceptor(Taro.interceptors.logInterceptor)
     Taro.request({
-      url: doubanHot3,
+      url: doubanHot,
       data: {
         start: page,
         count: 15,
@@ -104,11 +106,20 @@ export default class Hot extends Component {
       },
       success(e) {
         console.log(e.data)
-        _this.setState({
-          datas: _this.state.datas.concat(e.data.subjects),
-          total: e.data.total,
-          loadMore: 'more',
-        })
+        if(e.statusCode==200){
+          _this.setState({
+            datas: _this.state.datas.concat(e.data.subjects),
+            total: e.data.total,
+            loadMore: 'more',
+          })
+      }else{
+          //请求失败使用本地假数据
+          _this.setState({
+            datas: details.subjects,
+            total: e.data.total,
+            loadMore: 'noMore',
+          })
+      }
       },
       fail(e) {
 
