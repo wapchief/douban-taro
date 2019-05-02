@@ -16,8 +16,42 @@ const doubanDetails = 'https://douban.uieee.com/v2/movie/subject/'
 //本地代理请求
 // const doubanDetails = 'http://localhost:8080/v2/movie/subject/'
 
+import { connect } from '@tarojs/redux'
+import { ComponentClass } from 'react';
 
-export default class Details extends Component {
+type PageStateProps = {
+    details: {
+        details: {}
+    }
+}
+
+type PageDispatchProps = {
+    
+    details: (data: any) => void
+
+}
+
+type PageOwnProps = {}
+
+type PageState = {}
+
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+
+interface Index {
+  props: IProps;
+}
+
+
+@connect(({ details}) => ({
+    details
+  }), (dispatch) => ({
+    
+    details(data){
+      dispatch(details(data))
+    }
+  }))
+
+class Details extends Component {
 
     /**
      * 指定config的类型声明为: Taro.Config
@@ -83,6 +117,11 @@ export default class Details extends Component {
         })
         this._getDetails(date.id)
     }
+
+    onShareAppMessage() {
+        return {
+        }
+    }
     _getDetails(id) {
         Taro.showLoading({ title: '正在加载' })
         const _this = this
@@ -95,17 +134,17 @@ export default class Details extends Component {
             },
             success(e) {
                 console.log(e.statusCode + '========' + e.data)
-                if(e.statusCode==200){
+                if (e.statusCode == 200) {
                     _this.setState({
                         details: e.data,
                     })
-                }else{
+                } else {
                     //请求失败使用本地假数据
                     _this.setState({
                         details: details,
                     })
                 }
-                
+
             },
             fail(e) {
                 console.log('error')
@@ -116,9 +155,9 @@ export default class Details extends Component {
         })
     }
 
-    _summaryExp(){
+    _summaryExp() {
         this.setState({
-            summaryExpand:!this.state.summaryExpand
+            summaryExpand: !this.state.summaryExpand
         })
     }
 
@@ -130,24 +169,26 @@ export default class Details extends Component {
                 {/* 头部简介 */}
                 <Info data={item} />
                 {/* 评分模块 */}
-                <Rating data={item}/>
+                <Rating data={item} />
                 {/* 简介 */}
                 <View className="sub-title">简介</View>
                 <Text className={this.state.summaryExpand ? "summary-tv" : "summary-tv-all"}>{item.summary}</Text>
                 <View className="summary-bt" onClick={this._summaryExp.bind(this)}>{this.state.summaryExpand ? "" : "展开"}</View>
                 {/* 影人 */}
                 <View className="sub-title">影人</View>
-                <Casts data={item}/>
+                <Casts data={item} />
                 {/* 预告片剧照 */}
                 <View className="sub-title">预告片/剧照</View>
-                <Trailer data={item}/>
+                <Trailer data={item} />
                 {/* 热门短评 */}
                 <View className="sub-title">短评</View>
-                <Comments data={item}/>
+                <Comments data={item} />
                 {/* 热门影评 */}
                 <View className="sub-title">影评</View>
-                <Reviews data={item}/>
+                <Reviews data={item} />
             </ScrollView >
         )
     }
 }
+
+export default Details as ComponentClass<PageOwnProps, PageState>
