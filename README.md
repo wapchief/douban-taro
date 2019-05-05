@@ -1,10 +1,7 @@
 # douban-taro
 基于taro开发的豆瓣热映电影、top250电影列表
 
-![](https://github.com/wapchief/douban-taro/blob/master/image/douban1.jpeg?raw=true)
-![](https://github.com/wapchief/douban-taro/blob/master/image/douban2.jpeg?raw=true)
-![](https://github.com/wapchief/douban-taro/blob/master/image/douban3.jpeg?raw=true)
-
+![](https://github.com/wapchief/douban-taro/blob/master/image/douban4.jpeg?raw=true)
 ## Taro-UI组件库
 https://taro-ui.aotu.io/#/
 
